@@ -14,7 +14,7 @@
 	<name>spring-boot-tutorial-part-II</name>
 	<description>Second part of the Spring Boot Tutorial</description>
 	<properties>
-		<java.version>20</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
