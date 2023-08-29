@@ -29,7 +29,7 @@ public class UirComponentsBuilderExamples {
             .scheme("http")
             .host("jsonplaceholder.typicode.com")
             .path("/posts")
-            .path("/{postid}")
+            .path("/{id}")
             .buildAndExpand(postId)
             .encode();
         Assertions.assertEquals(uriComponents.toString(), "http://jsonplaceholder.typicode.com/posts/1");

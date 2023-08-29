@@ -22,24 +22,24 @@ import jakarta.annotation.PostConstruct;
 @RequestMapping(value = "/books")
 public class BookController {
 
-    private Map<Integer,Book> bookStore = new HashMap<>();
+    private Map<Integer, Book> bookStore = new HashMap<>();
 
     @PostConstruct
-    public void initBookStore(){
+    public void initBookStore() {
         bookStore.put(1, new Book("Lord Of the Rings", "J.R.R. Tolkien"));
-        bookStore.put(2,new Book("Lord of Flies", "William Golding"));
-        bookStore.put(3,new Book("1984", "George Orwell"));
+        bookStore.put(2, new Book("Lord of Flies", "William Golding"));
+        bookStore.put(3, new Book("1984", "George Orwell"));
     }
 
     @GetMapping(value = "/{bookId}")
-    public Book getBook(@PathVariable Integer bookId){
+    public Book getBook(@PathVariable Integer bookId) {
         return bookStore.get(bookId);
     }
 
     @GetMapping
-    public List<Book> getByAuthorName(@RequestParam(required = false, name = "author") String author){
-        if(author != null){
-            return bookStore.values().stream().filter( b -> b.author().contains(author) ).collect(Collectors.toList());
+    public List<Book> getByAuthorName(@RequestParam(required = false, name = "author") String author) {
+        if (author != null) {
+            return bookStore.values().stream().filter(b -> b.author().contains(author)).collect(Collectors.toList());
         } else {
             return bookStore.values().stream().collect(Collectors.toList());
         }
@@ -47,7 +47,7 @@ public class BookController {
 
     @PostMapping
     public Integer addBook(@RequestBody Book book) {
-        Integer newId = bookStore.size()+1;
+        Integer newId = bookStore.size() + 1;
         bookStore.put(newId, book);
         return newId;
     }
@@ -58,9 +58,9 @@ public class BookController {
     }
 
     @DeleteMapping(value = "/{bookId}")
-    public ResponseEntity<Void>  deleteBook(@PathVariable Integer bookId){
+    public ResponseEntity<Void> deleteBook(@PathVariable Integer bookId) {
         Book removed = bookStore.remove(bookId);
-        if (removed == null){
+        if (removed == null) {
             return ResponseEntity.notFound().build();
         } else {
             return ResponseEntity.ok().build();
